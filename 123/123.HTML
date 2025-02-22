@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Fake File Example</title>
+    <script type="text/javascript">
+        // دالة لإنشاء ملف نصي وتحميله بعد 3 ثواني
+        function downloadFile() {
+            var fileContent = "هذا ملف نصي يحتوي على مقلب تعليمات فقط.\nلا يحتوي على أي شيء ضار!";
+            var blob = new Blob([fileContent], { type: "text/plain" });
+            var link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "fakefile.txt";
+            link.click(); // تحميل الملف
+        }
+
+        // الانتظار 3 ثواني ثم تحميل الملف
+        setTimeout(downloadFile, 3000);
+    </script>
+</head>
+<body>
+    <h3>بعد 3 ثوانٍ سيتم تحميل ملف نصي وهمي.</h3>
+    <p>الملف لا يحتوي على أي شيء ضار. هو مجرد ملف نصي بسيط.</p>
+</body>
+</html>
