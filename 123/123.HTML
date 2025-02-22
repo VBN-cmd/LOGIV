@@ -1,26 +1,64 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"> <!-- تحديد اللغة العربية واتجاه النص من اليمين لليسار -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Fake File Example</title>
+    <meta name="description" content="صفحة لتحميل ملف نصي وهمي بعد 3 ثوانٍ">
+    <title>تحميل ملف وهمي</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #444;
+        }
+        p {
+            font-size: 1.1em;
+        }
+        .note {
+            font-style: italic;
+            color: #777;
+        }
+    </style>
     <script type="text/javascript">
-        // دالة لإنشاء ملف نصي وتحميله بعد 3 ثواني
+        /**
+         * دالة لإنشاء ملف نصي وتحميله تلقائيًا
+         */
         function downloadFile() {
-            var fileContent = "هذا ملف نصي يحتوي على مقلب تعليمات فقط.\nلا يحتوي على أي شيء ضار!";
-            var blob = new Blob([fileContent], { type: "text/plain" });
-            var link = document.createElement("a");
+            // محتوى الملف النصي
+            const fileContent = "هذا ملف نصي وهمي يحتوي على مقلب تعليمات فقط.\nلا يوجد أي محتوى ضار هنا!";
+            
+            // إنشاء كائن Blob يحتوي على النص
+            const blob = new Blob([fileContent], { type: "text/plain;charset=utf-8" });
+            
+            // إنشاء رابط لتحميل الملف
+            const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            link.download = "fakefile.txt";
-            link.click(); // تحميل الملف
+            link.download = "ملف_وهمي.txt"; // اسم الملف الذي سيتم تحميله
+            link.style.display = "none"; // إخفاء الرابط من الواجهة
+            
+            // إضافة الرابط إلى الصفحة والنقر عليه تلقائيًا
+            document.body.appendChild(link);
+            link.click();
+            
+            // تنظيف الرابط من الذاكرة
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
         }
 
-        // الانتظار 3 ثواني ثم تحميل الملف
-        setTimeout(downloadFile, 3000);
+        // بدء عملية التحميل بعد 3 ثوانٍ
+        window.onload = function() {
+            setTimeout(downloadFile, 3000);
+        };
     </script>
 </head>
 <body>
-    <h3>بعد 3 ثوانٍ سيتم تحميل ملف نصي وهمي.</h3>
-    <p>الملف لا يحتوي على أي شيء ضار. هو مجرد ملف نصي بسيط.</p>
+    <h1>تحميل ملف وهمي</h1>
+    <p>سيتم تحميل ملف نصي وهمي تلقائيًا بعد 3 ثوانٍ.</p>
+    <p class="note">ملاحظة: هذا الملف غير ضار وهو مجرد ملف نصي بسيط.</p>
 </body>
 </html>
